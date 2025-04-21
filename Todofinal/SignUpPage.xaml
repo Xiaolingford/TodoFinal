@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todofinal.SignUpPage"
+             Title="SignUpPage"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout
+            BackgroundColor="White"
+            Padding="30, 30"
+            Spacing="20">
+            <Image
+                Source="todologo.png"
+                HeightRequest="185"
+                WidthRequest="155"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                Margin="0,-25,0,0"
+                Text="Sign Up"
+                FontSize="32"
+                FontAttributes="Bold"
+                FontFamily="Inter"
+                HorizontalOptions="Center"
+                TextColor="#DD7519"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <VerticalStackLayout Spacing="5">
+                <!-- First Name -->
+                <Label
+                    Text="First Name"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Border Stroke="White"
+                        StrokeThickness="1"
+                        Background="White"
+                        Padding="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="3" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="FirstNameEntry" Placeholder="Juan" BackgroundColor="White" TextColor="Black"/>
+                </Border>
+
+                <!-- Last Name -->
+                <Label
+                    Text="Last Name"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Border Stroke="White"
+                        StrokeThickness="1"
+                        Background="White"
+                        Padding="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="3" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="LastNameEntry" Placeholder="Dela Cruz" BackgroundColor="White" TextColor="Black"/>
+                </Border>
+
+                <!-- Email -->
+                <Label
+                    Text="Email"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Border Stroke="White"
+                        StrokeThickness="1"
+                        Background="White"
+                        Padding="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="3" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="EmailEntry" Placeholder="juan.delaCruz@gmail.com" BackgroundColor="White" TextColor="Black" Keyboard="Email"/>
+                </Border>
+
+                <!-- Password -->
+                <Label
+                    Text="Password"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Grid>
+                    <Border Stroke="White"
+                            StrokeThickness="1"
+                            Background="White"
+                            Padding="2">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="3" />
+                        </Border.StrokeShape>
+                        <Entry x:Name="PasswordEntry" Placeholder="Enter your password" BackgroundColor="White" IsPassword="True" TextColor="Black"/>
+                    </Border>
+                    <Button x:Name="TogglePasswordButton" Text="👁" Clicked="OnTogglePasswordVisibility" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="Transparent" />
+                </Grid>
+
+                <!-- Confirm Password -->
+                <Label
+                    Text="Confirm Password"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Grid>
+                    <Border Stroke="White"
+                            StrokeThickness="1"
+                            Background="White"
+                            Padding="2">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="3" />
+                        </Border.StrokeShape>
+                        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm your password" BackgroundColor="White" IsPassword="True" TextColor="Black"/>
+                    </Border>
+                    <Button x:Name="ToggleConfirmPasswordButton" Text="👁" Clicked="OnToggleConfirmPasswordVisibility" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="Transparent" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <BoxView HeightRequest="20" BackgroundColor="Transparent"/>
+
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Sign Up" BackgroundColor="#F2A73D" TextColor="White" FontSize="18" CornerRadius="13" Clicked="OnSignUpClicked"/>
+                <Button Text="Sign In" Clicked="OnSignInClicked" BackgroundColor="#393433" TextColor="White" FontSize="18" CornerRadius="13"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FAD4B3" Offset="0" />
+                    <GradientStop Color="#F6B35C" Offset="1"/>
+                </LinearGradientBrush>
+            </VerticalStackLayout.Background>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Todofinal"
+             x:Class="Todofinal.TodoPage"
+             Title="TodoPage"
+             BackgroundColor="#FFFFFD"
+             Shell.NavBarIsVisible="False">
+    <AbsoluteLayout>
+        <!-- Background Image -->
+        <Image Source="gradient.png"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All"
+               Aspect="Fill" />
+
+        <!-- Main Content -->
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="*,Auto"
+              RowSpacing="0">
+            <!-- Scrollable Content -->
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20" Spacing="10" HorizontalOptions="Fill">
+                    <Image Source="todologo.png"
+                           WidthRequest="140"
+                           HeightRequest="140"
+                           Aspect="AspectFit"
+                           SemanticProperties.Description="logo"
+                           HorizontalOptions="Center"
+                           Margin="0,20,0,0" />
+
+                    <Label Text="To-Do List"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#CD5C24"
+                           FontFamily="Inter" />
+
+                    <CollectionView x:Name="TasksCollectionView"
+                                    ItemsSource="{Binding Tasks}"
+                                    SelectionMode="None"
+                                    Margin="0,0,0,20">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="#EFA434"
+                                        StrokeThickness="0.3"
+                                        BackgroundColor="White"
+                                        Padding="10"
+                                        Margin="0,5,0,6"
+                                        StrokeShape="RoundRectangle 10"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Center"
+                                        >
+                                    <Border.Shadow>
+                                        <Shadow Brush="Gray"
+                                                Radius="10"
+                                                Opacity="0.3"
+                                                Offset="0,5" />
+                                    </Border.Shadow>
+                                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                                        <CheckBox Grid.Column="0"
+                                                  Color="#CD5C24"
+                                                  IsChecked="{Binding IsCompleted}"
+                                                  VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="Fill">
+                                            <Label Text="{Binding TaskName}"
+                                                   TextColor="Black"
+                                                   FontSize="16"
+                                                   FontFamily="Inter"
+                                                   LineBreakMode="WordWrap"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Margin="0,9,0,0"
+                                                   MaxLines="0" />
+                                            
+                                        </VerticalStackLayout>
+                                        <!-- Edit Icon -->
+                                        <ImageButton Grid.Column="2"
+                                                     Source="edit_icon.png"
+                                                     WidthRequest="12"
+                                                     HeightRequest="12"
+                                                     Padding="10"
+                                                     VerticalOptions="Center"
+                                                     Clicked="OnEditTaskClicked"
+                                                     CommandParameter="{Binding .}" />
+                                        <!-- Delete Icon -->
+                                        <ImageButton Grid.Column="3"
+                                                     Source="delete_icon.png"
+                                                     WidthRequest="12"
+                                                     HeightRequest="12"
+                                                     Padding="10"
+                                                     VerticalOptions="Center"
+                                                     Clicked="OnDeleteTaskClicked"
+                                                     CommandParameter="{Binding .}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Bottom Navigation Bar -->
+            <Border Grid.Row="1"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    MinimumHeightRequest="60"
+                    Padding="10,10,10,17"
+                    Margin="0,-11">
+                <Border.Shadow>
+                    <Shadow Brush="Gray"
+                            Radius="10"
+                            Opacity="0.3"
+                            Offset="0,-5" />
+                </Border.Shadow>
+                <HorizontalStackLayout Spacing="80" HorizontalOptions="Center">
+                    <!-- To Do Icon -->
+                    <Border BackgroundColor="#EFA434"
+                            Padding="10,5,10,5"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="0">
+                            <ImageButton Source="todo_icon.png"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
+                                         Padding="7" />
+                            <Label Text="To Do"
+                                   TextColor="White"
+                                   FontSize="11"
+                                   FontFamily="Inter"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Completed Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="completed_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="7"
+                                     Clicked="OnCompletedClicked" />
+                        <Label Text="Completed"
+                               TextColor="Black"
+                               FontSize="12"
+                               FontFamily="Inter"
+                               Opacity="0.8"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+
+                    <!-- Profile Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="profile_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="7"
+                                     Clicked="OnProfileClicked" />
+                        <Label Text="Profile"
+                               TextColor="Black"
+                               FontSize="12"
+                               FontFamily="Inter"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               Opacity="0.9" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- Floating Plus Button -->
+            <Button Text="+"
+                    FontSize="24"
+                    TextColor="#EFA434"
+                    BackgroundColor="#FFC56F"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    CornerRadius="15"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,20,99"
+                    Grid.RowSpan="2"
+                    Clicked="OnAddTaskClicked"
+                    >
+                <Button.Shadow>
+                    <Shadow Brush="Gray"
+                            Radius="10"
+                            Opacity="0.5"
+                            Offset="3,3" />
+                </Button.Shadow>
+            </Button>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

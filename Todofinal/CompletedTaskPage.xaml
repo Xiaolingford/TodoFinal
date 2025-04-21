@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todofinal.CompletedTaskPage"
+             Title="CompletedTaskPage"
+             Shell.NavBarIsVisible="False">
+    <AbsoluteLayout>
+        <Image Source="gradient.png"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All"
+               Aspect="Fill" />
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="*,Auto"
+              RowSpacing="0">
+            <!-- Scrollable Content -->
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20" Spacing="0">
+                    <Image Source="todologo.png"
+                           WidthRequest="140"
+                           HeightRequest="140"
+                           Aspect="AspectFit"
+                           SemanticProperties.Description="logo"
+                           HorizontalOptions="Center" 
+                           Margin="0,10,0,0"/>
+
+                    <Label Text="Completed List"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#CD5C24"
+                           FontFamily="Inter" 
+                           Margin="0,15,0,0"/>
+
+                    <!-- Task 1: My first task -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,15,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="My first task"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10"
+                                         Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10"
+                                         Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 2: Stretch for 15 minutes -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="Stretch for 15 minutes"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 3: Read a chapter of a book -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="Read a chapter of a book"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 4: Create icons for a dashboard -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="Create icons for a dashboard"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 5: Prepare a design presentation -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="Prepare a design presentation"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                  Padding="10" Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 6: Live girl live -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="Live girl live"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Task 7: My first task (repeated) -->
+                    <Border Stroke="#EFA434"
+                            StrokeThickness="0.3"
+                            BackgroundColor="White"
+                            Padding="10"
+                            Margin="0,5,0,6"
+                            StrokeShape="RoundRectangle 10"
+                            HorizontalOptions="Fill">
+                        <Border.Shadow>
+                            <Shadow Brush="Gray"
+                                    Radius="10"
+                                    Opacity="0.3"
+                                    Offset="0,5" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0"
+                                      Color="#EFA434"
+                                      IsChecked="True"
+                                      VerticalOptions="Center"
+                                      IsEnabled="False" />
+                            <Label Grid.Column="1"
+                                   Text="My first task"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="Inter"
+                                   LineBreakMode="WordWrap"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextDecorations="Strikethrough"
+                                   MaxLines="0" />
+                            <ImageButton Grid.Column="2"
+                                   Source="edit_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                         Padding="10"
+                                    Clicked="OnEditClickedC"/>
+                            <ImageButton Grid.Column="3"
+                                   Source="delete_icon.png"
+                                   WidthRequest="12"
+                                   HeightRequest="12"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Padding="10" Clicked="OnDeleteClickedC"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Add some bottom margin to ensure space before the navigation bar -->
+                    <BoxView HeightRequest="20" Color="Transparent" />
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Bottom Navigation Bar -->
+            <Border Grid.Row="1"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    MinimumHeightRequest="60"
+                    Padding="10,10,10,17"
+                    Margin="0,-11">
+                <Border.Shadow>
+                    <Shadow Brush="Gray"
+                            Radius="10"
+                            Opacity="0.3"
+                            Offset="0,-5" />
+                </Border.Shadow>
+                <HorizontalStackLayout Spacing="80" HorizontalOptions="Center">
+                    <!-- To Do Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="todo2_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="8"
+                                     Opacity="0.9"
+                                     Clicked="OnToDoClicked" />
+                        <Label Text="To Do"
+                               TextColor="Black"
+                               FontSize="11"
+                               FontFamily="Inter"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               Opacity="0.8"/>
+                    </VerticalStackLayout>
+
+                    <!-- Completed Icon -->
+                    <Border BackgroundColor="#EFA434"
+                            Padding="10,0,10,5"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="3">
+                            <ImageButton Source="completed2_icon.png"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
+                                         Padding="7" />
+                            <Label Text="Completed"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   FontFamily="Inter"
+                                   Opacity="0.8"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Profile Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="profile_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="7"
+                                     Clicked="OnProfileClicked" />
+                        <Label Text="Profile"
+                               TextColor="Black"
+                               FontSize="12"
+                               FontFamily="Inter"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               Opacity="0.9" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

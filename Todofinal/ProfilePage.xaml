@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todofinal.ProfilePage"
+             Title="ProfilePage"
+             Shell.NavBarIsVisible="False">
+    <AbsoluteLayout>
+        <Image Source="grad3.png"
+       AbsoluteLayout.LayoutBounds="0,0,1,1"
+       AbsoluteLayout.LayoutFlags="All"
+       Aspect="Fill" />
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="*,Auto"
+              RowSpacing="0">
+            <!-- Scrollable Content -->
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="0" Spacing="10" Margin="0,150,0,0">
+                    
+
+                    <Label Text="User Profile"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       FontFamily="Inter" />
+                    <Image Source="avatar.png"
+                          HeightRequest="120"
+                            WidthRequest="120"
+                         VerticalOptions="Center"
+                      HorizontalOptions="Center"/>
+                    <Label Text="Monica H. Hichew"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           FontFamily="Inter"/>
+                    <Label Text="thisisyourEmail@gmail.com"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="12"
+                           TextColor="Black" />
+
+                    
+                    <Button Text="Logout"
+        BackgroundColor="#48413D"
+        TextColor="White"
+        FontSize="16"
+        FontFamily="Inter"
+        CornerRadius="10"
+        Padding="20,10"
+        WidthRequest="220"
+        HeightRequest="50"
+        Clicked="OnLogOut"
+        Margin="0,200,0,0"
+        HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Bottom Navigation Bar -->
+            <Border Grid.Row="1"
+                BackgroundColor="#FFFFFF"
+                Stroke="White"
+                StrokeThickness="1"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                MinimumHeightRequest="60"
+                Padding="10,10,10,17"
+                Margin="0,-11">
+                <Border.Shadow>
+                    <Shadow Brush="Gray"
+                        Radius="10"
+                        Opacity="0.3"
+                        Offset="0,-5" />
+                </Border.Shadow>
+                <HorizontalStackLayout Spacing="80" HorizontalOptions="Center">
+                    <!-- To Do Icon -->
+
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="todo2_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="8"
+                                     Opacity="0.9"
+                                     Clicked="OnToDoClicked"
+                                      />
+                        <Label Text="To Do"
+                               TextColor="Black"
+                               FontSize="11"
+                               FontFamily="Inter"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               Opacity="0.8"/>
+                    </VerticalStackLayout>
+
+
+                    <!-- Completed Icon -->
+
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="completed_icon.png"
+                         WidthRequest="10"
+                          HeightRequest="10"
+                          Padding="8,0,0,0"
+                          Clicked="OnCompletedClicked"
+                          />
+                        <Label Text="Completed"
+                  TextColor="Black"
+                  FontSize="12"
+                  FontFamily="Inter"
+                  Opacity="0.8"
+                  HorizontalOptions="Center"
+                  FontAttributes="Bold"
+                               Padding="8,0,0,0"
+                               
+                  />
+                        
+                    </VerticalStackLayout>
+
+                    <!-- Profile Icon -->
+            <Border BackgroundColor="#EFA434"
+                Padding="10,0,10,5"
+                StrokeShape="RoundRectangle 10">
+                <VerticalStackLayout Spacing="5" >
+                        <ImageButton Source="prof2.png"
+                                 WidthRequest="40"
+                                 HeightRequest="40"
+                                 Padding="3"
+                                  />
+                        <Label Text="Profile"
+                           TextColor="White"
+                           FontSize="12"
+                           FontFamily="Inter"
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"
+                           Opacity="0.9" />
+                    </VerticalStackLayout>
+                    </Border>
+                </HorizontalStackLayout>
+            </Border>
+
+
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

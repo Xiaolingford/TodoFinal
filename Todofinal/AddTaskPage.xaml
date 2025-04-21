@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todofinal.AddTaskPage"
+             Title="Add Task"
+             BackgroundColor="#FFFFFD"
+             Shell.NavBarIsVisible="False">
+    <AbsoluteLayout>
+        <!-- Background Image -->
+        <Image Source="gradient2.png"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All"
+               Aspect="Fill" />
+
+        <!-- Main Content -->
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="*,Auto"
+              RowSpacing="0">
+            <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="20">
+                <!-- Header with Back Arrow and New Task Label -->
+                <Grid ColumnDefinitions="Auto,*">
+                    <ImageButton Grid.Column="0"
+                                 Source="back_arrow_icon.png" 
+                                 WidthRequest="12"
+                                 HeightRequest="12"
+                                 Padding="2"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Start"
+                                 Clicked="OnBackTapped" />
+                    <Label Grid.Column="1"
+                           Text="New Task"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#CD5C24"
+                           FontFamily="Inter"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Margin="-38,0,0,0"/>
+                </Grid>
+
+                <Border BackgroundColor="#F3EFEE" 
+                        StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="0">
+                    <Entry x:Name="TaskNameEntry"
+                           Placeholder="  Write a task..."
+                           FontSize="16"
+                           FontFamily="Inter"
+                           TextColor="Black"
+                           PlaceholderColor="Black"
+                           Opacity="0.9"/>
+                </Border>
+
+                <Border BackgroundColor="#F3EFEE" 
+                        StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="0" 
+                        HeightRequest="200">
+                    <Entry x:Name="OnDescriptionEntry"
+                           Placeholder="  Description (optional)..."
+                           FontSize="16"
+                           FontFamily="Inter"
+                           TextColor="Black"
+                           PlaceholderColor="Black"
+                           Opacity="0.9"/>
+                </Border>
+
+                <Button Text="Add"
+                        BackgroundColor="#48413D"
+                        TextColor="White"
+                        FontSize="16"
+                        FontFamily="Inter"
+                        CornerRadius="10"
+                        Padding="20,10"
+                        WidthRequest="350"
+                        HeightRequest="50"
+                        Clicked="OnSaveClicked"
+                        Margin="0,300,0,0"
+                        HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Bottom Navigation Bar -->
+            <Border Grid.Row="1"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    MinimumHeightRequest="60"
+                    Padding="10,10,10,17"
+                    Margin="0,-11">
+                <Border.Shadow>
+                    <Shadow Brush="Gray"
+                            Radius="10"
+                            Opacity="0.3"
+                            Offset="0,-5" />
+                </Border.Shadow>
+                <HorizontalStackLayout Spacing="80" HorizontalOptions="Center">
+                    <!-- To Do Icon -->
+                    <Border BackgroundColor="#EFA434"
+                            Padding="10,5,10,5"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="0">
+                            <ImageButton Source="todo_icon.png"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
+                                         Padding="7" />
+                            <Label Text="To Do"
+                                   TextColor="White"
+                                   FontSize="11"
+                                   FontFamily="Inter"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Completed Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="completed_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="7"
+                                     Clicked="OnCompletedClicked" />
+                        <Label Text="Completed"
+                               TextColor="Black"
+                               FontSize="12"
+                               FontFamily="Inter"
+                               Opacity="0.8"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+
+                    <!-- Profile Icon -->
+                    <VerticalStackLayout Spacing="5">
+                        <ImageButton Source="profile_icon.png"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     Padding="7"
+                                     Clicked="OnProfileClicked" />
+                        <Label Text="Profile"
+                               TextColor="Black"
+                               FontSize="12"
+                               FontFamily="Inter"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               Opacity="0.9" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

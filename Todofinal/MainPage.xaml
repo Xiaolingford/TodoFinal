@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todofinal.MainPage"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout
+            BackgroundColor="White"
+            Padding="30, 30"
+            Spacing="5">
+            <Image
+                Margin="0,15,0,0"
+                Source="todologo.png"
+                HeightRequest="155"
+                WidthRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                Text="Sign In"
+                FontSize="32"
+                FontFamily="Inter"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#DD7519"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Email"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Border Stroke="White"
+                        StrokeThickness="1"
+                        Background="White"
+                        Padding="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="3" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="juan.delaCruz@gmail.com"
+                           BackgroundColor="Transparent"
+                           TextColor="Black"
+                           Keyboard="Email" />
+                </Border>
+                <Label
+                    Text="Password"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+                <Grid>
+                    <Border Stroke="White"
+                            StrokeThickness="1"
+                            Background="White"
+                            Padding="2">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="3"/>
+                        </Border.StrokeShape>
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Enter your password"
+                               BackgroundColor="White"
+                               IsPassword="True"
+                               TextColor="Black"/>
+                    </Border>
+                    <Button x:Name="TogglePasswordButton"
+                            Text="👁"
+                            Clicked="OnTogglePasswordVisibility"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <Grid Padding="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="RememberMeCheckBox"
+                          VerticalOptions="Center"
+                          Color="Gray"/>
+                <Label Text="Remember me"
+                       TextColor="Gray"
+                       VerticalOptions="Center"
+                       Grid.Column="1"/>
+                <Label Text="Forgot Password ?"
+                       TextColor="Black"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Grid.Column="1"
+                       FontAttributes="Bold"
+                       Opacity="0.7">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
+                <Button Text="Sign In"
+                        Clicked="OnSignIn"
+                        BackgroundColor="#F2A73D"
+                        TextColor="White"
+                        FontSize="18"
+                        CornerRadius="13"/>
+                <Button Text="Sign Up"
+                        Clicked="OnSignUp"
+                        BackgroundColor="#393433"
+                        TextColor="White"
+                        FontSize="18"
+                        CornerRadius="13"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FAD4B3" Offset="0" />
+                    <GradientStop Color="#F6B35C" Offset="1"/>
+                </LinearGradientBrush>
+            </VerticalStackLayout.Background>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
