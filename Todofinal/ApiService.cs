@@ -55,6 +55,41 @@ public class ApiService
             return new SignInResponse { Status = 500, Message = $"Error: {ex.Message}" };
         }
     }
+
+    // *** Added: Add ToDo Task API method ***
+    /// <summary>
+    /// Calls POST /addItem_action.php to create a new ToDo.
+    /// </summary>
+    public async Task<AddTodoResponse> AddTodoAsync(string itemName, string itemDescription, int userId)
+    {
+        try
+        {
+            var todoData = new
+            {
+                item_name = itemName,
+                item_description = itemDescription,
+                user_id = userId
+            };
+            var response = await _httpClient.PostAsJsonAsync("addItem_action.php", todoData);
+            var result = await response.Content.ReadFromJsonAsync<AddTodoResponse>();
+
+            // in case the server returns no body
+            return result
+                 ?? new AddTodoResponse
+                 {
+                     status = (int)response.StatusCode,
+                     message = "Empty response from server."
+                 };
+        }
+        catch (Exception ex)
+        {
+            return new AddTodoResponse
+            {
+                status = 500,
+                message = $"Error: {ex.Message}"
+            };
+        }
+    }
 }
 
 public class SignUpResponse
@@ -79,4 +114,27 @@ public class SignInData
     public string Lname { get; set; }
     public string Email { get; set; }
     public string Timemodified { get; set; }
+}
+
+// *** Added: Models for Add ToDo API response ***
+public class AddTodoResponse
+{
+    public int status { get; set; }
+    public TodoItem data { get; set; }
+    public string message { get; set; }
+
+    /// <summary>
+    /// Convenience flag for status == 200
+    /// </summary>
+    public bool Success => status == 200;
+}
+
+public class TodoItem
+{
+    public int item_id { get; set; }
+    public string item_name { get; set; }
+    public string item_description { get; set; }
+    public string status { get; set; }
+    public int user_id { get; set; }
+    public string timemodified { get; set; }
 }

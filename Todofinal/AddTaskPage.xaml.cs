@@ -1,59 +1,69 @@
-namespace Todofinal;
+using System;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;      // *** Added: Preferences API to fetch saved user ID
 
-public partial class AddTaskPage : ContentPage
+namespace Todofinal
 {
-    private TaskCompletionSource<TaskItem> _taskCompletionSource;
-
-    public Task<TaskItem> TaskAdded => _taskCompletionSource.Task;
-
-    public AddTaskPage()
+    public partial class AddTaskPage : ContentPage
     {
-        InitializeComponent();
-        _taskCompletionSource = new TaskCompletionSource<TaskItem>();
-    }
+        // *** Added: ApiService instance for calling AddTodoAsync ***
+        private readonly ApiService _apiService;
 
-    private async void OnSaveClicked(object sender, EventArgs e)
-    {
-        if (!string.IsNullOrWhiteSpace(TaskNameEntry.Text))
+        public AddTaskPage()
         {
-            var newTask = new TaskItem
+            InitializeComponent();
+
+            _apiService = new ApiService();
+        }
+
+        private async void OnSaveClicked(object sender, EventArgs e)
+        {
+            // *** Gather & trim inputs ***
+            var name = TaskNameEntry.Text?.Trim();
+            var desc = OnDescriptionEntry.Text?.Trim();
+
+            // *** Validation: ensure name is provided ***
+            if (string.IsNullOrEmpty(name))
             {
-                TaskName = TaskNameEntry.Text,
-                IsCompleted = false,
-                Description = string.IsNullOrWhiteSpace(OnDescriptionEntry.Text) ? null : OnDescriptionEntry.Text
-            };
-            _taskCompletionSource.SetResult(newTask);
+                await DisplayAlert("Validation Error", "Please enter a task name.", "OK");
+                return;
+            }
+
+            // *** Retrieve the signed-in user’s ID from Preferences ***
+            //    (You must save this at sign-in via: Preferences.Set("UserId", <id>))
+            int userId = Preferences.Get("UserId", 0);
+            if (userId == 0)
+            {
+                await DisplayAlert("Error", "User not signed in. Please sign in first.", "OK");
+                return;
+            }
+
+            // *** Call the new AddTodo API ***
+            var result = await _apiService.AddTodoAsync(name, desc, userId);
+
+            if (result.Success)
+            {
+                await DisplayAlert("Success", result.message, "OK");
+
+                // *** Optional: inform your list page of the new item ***
+                MessagingCenter.Send(this, "TodoAdded", result.data);
+
+                // Navigate back
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Error", result.message, "OK");
+            }
+        }
+
+        private async void OnBackTapped(object sender, EventArgs e) =>
             await Navigation.PopAsync();
-        }
-        else
-        {
-            _taskCompletionSource.SetResult(null);
-            await Navigation.PopAsync();
-        }
 
+        private async void OnCompletedClicked(object sender, EventArgs e) =>
+            await Navigation.PushAsync(new CompletedTaskPage());
 
-    }
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        if (!_taskCompletionSource.Task.IsCompleted)
-        {
-            _taskCompletionSource.SetResult(null);
-        }
-    }
-    private async void OnBackTapped(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
-    }
-
-   private async void OnCompletedClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new CompletedTaskPage());
-    }
-
-    private async void OnProfileClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new ProfilePage());
+        private async void OnProfileClicked(object sender, EventArgs e) =>
+            await Navigation.PushAsync(new ProfilePage());
     }
 }
