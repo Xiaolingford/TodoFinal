@@ -2,10 +2,18 @@ namespace Todofinal;
 
 public partial class EditComplete : ContentPage
 {
-	public EditComplete()
+    private TaskItem _task;
+	public EditComplete(TaskItem task = null)
 	{
 		InitializeComponent();
-	}
+        _task = task;
+        
+        if (_task != null)
+        {
+           
+        }
+    }
+	
 
     private async void OnBackTapped(object sender, EventArgs e)
     {

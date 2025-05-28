@@ -174,6 +174,95 @@ public class ApiService
             return new GetTasksResponse { Status = 500, Message = $"Error: {ex.Message}" };
         }
     }
+    
+    // Add Task: POST /addItem_action.php
+    public async Task<AddTaskResponse> AddTaskAsync(int userId, string taskName, string description)
+    {
+        try
+        {
+            var taskData = new
+            {
+                user_id = userId,
+                item_name = taskName,
+                item_description = description
+            };
+            var response = await _httpClient.PostAsJsonAsync("addItem_action.php", taskData);
+            var rawContent = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"Add Task API URL: {BaseUrl}addItem_action.php");
+            System.Diagnostics.Debug.WriteLine($"Add Task HTTP Status: {response.StatusCode}");
+            System.Diagnostics.Debug.WriteLine($"Add Task Response: {rawContent}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new AddTaskResponse { Status = (int)response.StatusCode, Message = $"HTTP Error: {rawContent}" };
+            }
+
+            AddTaskResponse result;
+            try
+            {
+                result = JsonSerializer.Deserialize<AddTaskResponse>(rawContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            catch (JsonException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Add Task JSON Error: {ex.Message}");
+                return new AddTaskResponse { Status = 500, Message = $"JSON Error: {ex.Message}" };
+            }
+
+            return result ?? new AddTaskResponse { Status = (int)response.StatusCode, Message = "No response data" };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Add Task Exception: {ex.Message}");
+            return new AddTaskResponse { Status = 500, Message = $"Error: {ex.Message}" };
+        }
+    }
+    
+    public async Task<UpdateTaskStatusResponse> UpdateTaskStatusAsync(int itemId, string status)
+    {
+        try
+        {
+            var requestData = new
+            {
+                item_id = itemId,
+                status = status // "active" or "inactive"
+            };
+
+            var response = await _httpClient.PutAsJsonAsync("statusItem_action.php", requestData);
+            var rawContent = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"Update Task Status API URL: {BaseUrl}statusItem_action.php");
+            System.Diagnostics.Debug.WriteLine($"Update Task Status HTTP Status: {response.StatusCode}");
+            System.Diagnostics.Debug.WriteLine($"Update Task Status Response: {rawContent}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new UpdateTaskStatusResponse { Status = (int)response.StatusCode, Message = $"HTTP Error: {rawContent}" };
+            }
+
+            UpdateTaskStatusResponse result;
+            try
+            {
+                result = JsonSerializer.Deserialize<UpdateTaskStatusResponse>(rawContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            catch (JsonException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Update Task Status JSON Error: {ex.Message}");
+                return new UpdateTaskStatusResponse { Status = 500, Message = $"JSON Error: {ex.Message}" };
+            }
+
+            return result ?? new UpdateTaskStatusResponse { Status = (int)response.StatusCode, Message = "No response data" };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Update Task Status Exception: {ex.Message}");
+            return new UpdateTaskStatusResponse { Status = 500, Message = $"Error: {ex.Message}" };
+        }
+    }
 }
 
 public class SignUpResponse
@@ -239,4 +328,28 @@ public class TaskResponse
 
     // Map status to isCompleted for UI
     public bool IsCompleted => Status == "inactive";
+}
+public class AddTaskResponse
+{
+    [JsonPropertyName("status")]
+    public int Status { get; set; }
+
+    [JsonPropertyName("data")]
+    public TaskResponse Data { get; set; }
+
+    [JsonPropertyName("message")]
+    public string Message { get; set; }
+
+    public bool Success => Status == 200;
+}
+
+public class UpdateTaskStatusResponse
+{
+    [JsonPropertyName("status")]
+    public int Status { get; set; }
+
+    [JsonPropertyName("message")]
+    public string Message { get; set; }
+
+    public bool Success => Status == 200;
 }

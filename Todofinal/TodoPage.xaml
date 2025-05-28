@@ -61,7 +61,8 @@
                                         <CheckBox Grid.Column="0"
                                                   Color="#CD5C24"
                                                   IsChecked="{Binding IsCompleted}"
-                                                  VerticalOptions="Center" />
+                                                  VerticalOptions="Center"
+                                                  CheckedChanged="OnTaskCheckedChanged"/>
                                         <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="Fill">
                                             <Label Text="{Binding TaskName}"
                                                    TextColor="Black"

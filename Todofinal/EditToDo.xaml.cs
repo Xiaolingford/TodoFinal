@@ -2,9 +2,11 @@ namespace Todofinal;
 
 public partial class EditToDo : ContentPage
 {
-	public EditToDo()
+    private TaskItem _task;
+	public EditToDo(TaskItem task = null)
 	{
 		InitializeComponent();
+        _task = task;
 	}
 
     private async void OnBackTapped(object sender, EventArgs e)
