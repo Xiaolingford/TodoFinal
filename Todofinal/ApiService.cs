@@ -90,6 +90,33 @@ public class ApiService
             };
         }
     }
+
+
+    // Delete Todo:
+    public async Task<DeleteResponse> DeleteTodoAsync(int itemId)
+    {
+        try
+        {
+            // Call DELETE endpoint
+            var response = await _httpClient.DeleteAsync($"deleteItem_action.php?item_id={itemId}");
+            var result = await response.Content.ReadFromJsonAsync<DeleteResponse>();
+
+            // If server returned no body, synthesize one from status code
+            return result ?? new DeleteResponse
+            {
+                status = (int)response.StatusCode,
+                message = response.ReasonPhrase
+            };
+        }
+        catch (Exception ex)
+        {
+            return new DeleteResponse
+            {
+                status = 500,
+                message = $"Error: {ex.Message}"
+            };
+        }
+    }
 }
 
 public class SignUpResponse
@@ -126,6 +153,13 @@ public class AddTodoResponse
     /// <summary>
     /// Convenience flag for status == 200
     /// </summary>
+    public bool Success => status == 200;
+}
+
+public class DeleteResponse
+{
+    public int status { get; set; }
+    public string message { get; set; }
     public bool Success => status == 200;
 }
 

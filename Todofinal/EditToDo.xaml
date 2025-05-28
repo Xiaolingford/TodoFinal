@@ -85,7 +85,8 @@
                             WidthRequest="350"
                             HeightRequest="50"
                             Margin="0,0,0,0"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="Center"
+                            Clicked="OnCompleteClicked" />
                     <Button Text="Delete"
                             BackgroundColor="#BA5D38"
                             TextColor="White"
@@ -96,7 +97,8 @@
                             WidthRequest="350"
                             HeightRequest="50"
                             Margin="0,0,0,0"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="Center"
+                            Clicked="OnDeleteClicked" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
 
