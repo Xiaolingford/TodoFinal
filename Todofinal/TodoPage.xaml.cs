@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace Todofinal;
 
+
 public partial class TodoPage : ContentPage
 {
     public ObservableCollection<TaskItem> Tasks { get; set; }
@@ -147,18 +148,43 @@ public partial class TodoPage : ContentPage
 
     private async void OnEditTaskClicked(object sender, EventArgs e)
     {
+<<<<<<< Updated upstream
         Debug.WriteLine("Edit button clicked");
         if (sender is ImageButton button && button.CommandParameter is TaskItem task)
         {
             Debug.WriteLine($"Editing task ID: {task.Id}");
             await Navigation.PushAsync(new EditToDo(task));
         }
+=======
+        var button = (ImageButton)sender;
+        var task = (TaskItem)button.CommandParameter;
+        await Navigation.PushAsync(new EditToDo(TaskItem));
+>>>>>>> Stashed changes
     }
 
     private async void OnDeleteTaskClicked(object sender, EventArgs e)
     {
+<<<<<<< Updated upstream
         Debug.WriteLine("Delete button clicked");
         if (sender is ImageButton button && button.CommandParameter is TaskItem task)
+=======
+        var button = (ImageButton)sender;
+        var task = (TaskItem)button.CommandParameter;
+        await Navigation.PushAsync(new EditToDo(TaskItem));
+    }
+}
+
+public class TaskItem : INotifyPropertyChanged
+{
+    public int ItemId { get; set; }
+    private string _taskName;
+    private bool _isCompleted;
+    private string _description;
+    public string TaskName
+    {
+        get => _taskName;
+        set
+>>>>>>> Stashed changes
         {
             Debug.WriteLine($"Deleting task ID: {task.Id}");
             bool confirm = await DisplayAlert("Confirm Delete", $"Are you sure you want to delete '{task.TaskName}'?", "Yes", "No");
